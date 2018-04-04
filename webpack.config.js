@@ -4,6 +4,7 @@ var webpack = require("webpack");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+
 //var environment = process.env.NODE_ENV || "development";
 
 var provided = {
@@ -12,19 +13,14 @@ var provided = {
 };
 
 // Get all the compiled contracts for our environment.
-/*var contracts_directory = path.join("./", "environments", environment, "contracts");
-fs.readdirSync("./environments/" + environment + "/contracts").forEach(function(file) {
-  if (path.basename(file).indexOf(".sol.js")) {
-    provided[path.basename(file, ".sol.js")] = path.resolve(contracts_directory + "/" + file);
-  }
-});*/
 
-var contracts_directory = path.join("./", "build","contracts");
+var contracts_directory = path.join("./","build","contracts");
 fs.readdirSync(contracts_directory).forEach(function(file) {
-  if (path.basename(file).indexOf(".sol.js")) {
-    provided[path.basename(file, ".sol.js")] = path.resolve(path.join(contracts_directory, file));
+  if (path.basename(file).indexOf(".json")) {
+    provided[path.basename(file, ".json")] = path.resolve(path.join(contracts_directory, file));
   }
 });
+console.log(provided);
 
 module.exports = {
   entry: './app/javascripts/init.js',

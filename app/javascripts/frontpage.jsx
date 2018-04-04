@@ -27,18 +27,18 @@ var FrontPage = React.createClass({
     */
     if(window.offline) {
       var offline_msg = <p style={{textAlign: "center"}}>You are currently OFFLINE. <br /><br />
-      In order to use the Token Factory, you need to: <br />
-    <a style={{textAlign: "center"}} href="https://metamask.io"><img width="200px" className="logo img-responsive center-block" src="./images/mm.png"></img></a>
+      In order to use the Token Factory for Nekonium, you need to: <br />
+    <a style={{textAlign: "center"}} href="https://github.com/nekonium/NukoMask"><img width="200px" className="logo img-responsive center-block" src="./images/NukoMask.png"></img></a>
     </p>
 
     }
     return (
       <div>
-        <h2 style={{textAlign: 'center'}}> Token Factory (Alpha) </h2>
+        <h2 style={{textAlign: 'center'}}> Token Factory for Nekonium(Alpha) </h2>
         <img width="200px" className="logo img-responsive center-block" src="./images/icon.png"></img>
         <br />
         <p style={{textAlign: "center"}}>
-        Issue & Interact with Standard Token Contracts on Ethereum. <br />
+        Issue & Interact with Standard Token Contracts on Nekonium. <br />
       <br />
         {offline_msg} <br />
         <br />

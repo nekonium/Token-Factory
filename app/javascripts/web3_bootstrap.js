@@ -1,4 +1,4 @@
-//for Mist & Metamask support
+//for Metamask support
 var Web3 = require("web3");
 var Pudding = require("ether-pudding");
 //var uportLib = require('uport-lib');
@@ -8,13 +8,14 @@ window.offline = true; //default is there is no web3 available.
 window.ls = localStorage; //for debugging
 
 //TODO: add in flag to ALSO attach to a local node, besides through metamask.
+//Nukomaskの下にあるweb3を探す
 
-if (typeof web3 !== 'undefined') {
+if (typeof nukomask !== 'undefined' && typeof nukomask.web3 !== 'undefined') {
   // Use the Mist/wallet provider as it is available
   console.log("provider is available");
-  exported_web3 = new Web3(web3.currentProvider);
+  exported_web3 = new Web3(nukomask.web3.currentProvider);
   window.offline = false; //there is a web3 available.
-  localStorage["provider"] = "metamask";
+  localStorage["provider"] = "nukomask";
 
 } else {
   //If not available, check if the user has set to use uPort (localstorage).
@@ -25,7 +26,7 @@ if (typeof web3 !== 'undefined') {
     window.offline = false;*/
   } else {
     //redirect to front-page?
-    console.log("A web3 provider is NOT present. Telling user to get one.");
+    console.log("A nukomask.web3 provider is NOT present. Telling user to get one.");
     console.log("For now. NOT connected to a localhost.");
     console.log("THUS. Offline flag remains TRUE.");
     exported_web3 = new Web3();
