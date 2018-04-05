@@ -76,6 +76,11 @@ var TxForm = React.createClass({
       var that = this;
 
       web3.eth.getAccounts(function(err, accounts){
+        console.log("Number of account:"+accounts.length);
+        if(accounts.length==0){
+          alert("Account not exist.");
+          return;
+        }
 
         var addr = accounts[0];
         //TODO: change gas price to be dynamic. Included quicker into a block.

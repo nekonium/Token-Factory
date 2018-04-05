@@ -1,6 +1,27 @@
 import React from "react";
 import { Link } from "react-router";
+import LocalizedStrings from 'react-localization';
 
+let __t = new LocalizedStrings({
+  en:{
+    home:"Home",
+    block_number:"Block Number",
+    interract_with_token:"Interact With Token Contract",
+    create_token_contract:"Create Token Contract"
+  },
+  ja: {
+    home:"ホーム",
+    block_number:"ブロック番号",
+    interract_with_token:"トークンの操作",
+    create_token_contract:"トークンの作成"
+  }
+ });
+if(Intl.NumberFormat().resolvedOptions().locale.indexOf('ja') === 0){
+  __t.setLanguage("ja");
+}else{
+  __t.setLanguage("en");
+}
+console.log(__t.getLanguage()); 
 /*
 Basic navbar.
 Shows dynamic block number for good UX
@@ -62,14 +83,14 @@ var NavBar = React.createClass({
                 <span className="icon-bar"></span>
               </button>
               <a className="navbar-brand" href="#"><img height="25px" src="./images/icon.png"></img></a>
-              <p className="navbar-text" style={{textDecoration: 'underline'}}>Block Number: {this.state.current_blocknr}. {this.state.time_diff}s. </p>
+              <p className="navbar-text" style={{textDecoration: 'underline'}}>{__t.block_number}: {this.state.current_blocknr}. {this.state.time_diff}s. </p>
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
-                <li><Link to={'/'}>Home</Link></li>
-                <li><Link to={'/tokensearch'}>Interact With Token Contract</Link></li>
-                <li><Link to={'/factory'}>Create Token Contract</Link></li>
+                <li><Link to={'/'}>{__t.home}</Link></li>
+                <li><Link to={'/tokensearch'}>{__t.interract_with_token}</Link></li>
+                <li><Link to={'/factory'}>{__t.create_token_contract}</Link></li>
                 {uport_deactivate}
                 <li><p className="navbar-text" style={{color: 'red'}}>{this.props.offline_msg}</p></li>
               </ul>

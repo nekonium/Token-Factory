@@ -1,7 +1,34 @@
 import React from "react";
 import {TXComponent} from "reflux-tx";
 import TxForm from "./txform.jsx";
+import LocalizedStrings from 'react-localization';
 
+let __t = new LocalizedStrings({
+  en:{
+    interuct_token:"Interacting with token at address",
+    total_supply_is:"Total Supply is",
+    transfer_msg:"Transfer to another account.",
+    approve_msg:"Approve account to withdraw multiple times up to the specified amount.",
+    balanceOf_msg:"Check balance of account.",
+    transferFrom_msg:"Transfer between accounts a specified amount that you've been authorised to do so.",
+    allowance_msg:"Check what amount has been approved for withdrawal between two accounts."
+  },
+  ja: {
+    interuct_token:"トークンコントラクトのアドレス",
+    total_supply_is:"発行数量",
+    transfer_msg:"ほかのアカウントに送信する。",
+    approve_msg:"他のアカウントが引き出し可能な量を設定します。（コントラクト向け）",
+    balanceOf_msg:"このアカウントの所有量を得ます。",
+    transferFrom_msg:"approveにより承認されているトークンを他のアカウントから引き出します。（コントラクト向け）",
+    allowance_msg:"transferFromによって引き出せるトークンの総量を返します。（コントラクト向け）"
+  }
+ });
+if(Intl.NumberFormat().resolvedOptions().locale.indexOf('ja') === 0){
+  __t.setLanguage("ja");
+}else{
+  __t.setLanguage("en");
+}
+console.log(__t.getLanguage()); 
 /*
 Token wallet page. How you interact with a standard token.
 
@@ -160,8 +187,8 @@ var TokenPage = React.createClass({
     return (
       <div>
         {top_header}
-        Interacting with token at address: {this.state.contract_address}. <br />
-        Total Supply is: {this.state.totalSupply}. <br />
+        {__t.interuct_token}: {this.state.contract_address}. <br />
+        {__t.total_supply_is}: {this.state.totalSupply}. <br />
         <br />
         <div className="form-group">
           <TXComponent filter={{txType: "transfer"}}>
@@ -170,7 +197,7 @@ var TokenPage = React.createClass({
                     txType = "transfer"
                     abiFunction = "transfer"
                     header = {transfer_header}
-                    msg = "Transfer to another account."
+                    msg = {__t.transfer_msg}
                     buttonAction = "Transfer Amount"
                     buttonProcessing = "Transferring Amount"
                     successful = {this.successOnTransfer}
@@ -187,7 +214,7 @@ var TokenPage = React.createClass({
                   txType = "approve"
                   abiFunction = "approve"
                   header = "Approve Account"
-                  msg = "Approve account to withdraw multiple times up to the specified amount."
+                  msg = {__t.approve_msg}
                   buttonAction = "Approve Amount"
                   buttonProcessing = "Approving Amount"
                   successful = {this.successOnApproval}
@@ -203,7 +230,7 @@ var TokenPage = React.createClass({
                 txType = "balanceOf"
                 abiFunction = "balanceOf"
                 header = "Check Balance"
-                msg = "Check balance of account."
+                msg = {__t.balanceOf_msg}
                 buttonAction = "Check Balance"
                 buttonProcessing = "Checking Balance"
                 successful = {this.successOnBalance}
@@ -218,7 +245,7 @@ var TokenPage = React.createClass({
                   txType = "transferFrom"
                   abiFunction = "transferFrom"
                   header = "Transfer Allowance"
-                  msg = "Transfer between accounts a specified amount that you've been authorised to do so."
+                  msg = {__t.transferFrom_msg}
                   buttonAction = "Transfer Allowance"
                   buttonProcessing = "Transferring Allowance"
                   successful = {this.successOnTransferFrom}
@@ -235,7 +262,7 @@ var TokenPage = React.createClass({
                 txType = "allowance"
                 abiFunction = "allowance"
                 header = "Check Allowance"
-                msg = "Check what amount has been approved for withdrawal between two accounts."
+                msg = {__t.allowance_msg}
                 buttonAction = "Check Allowance"
                 buttonProcessing = "Checking Allowance"
                 successful = {this.successOnAllowance}
