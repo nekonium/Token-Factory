@@ -91,6 +91,7 @@ var NavBar = React.createClass({
                 <li><Link to={'/'}>{__t.home}</Link></li>
                 <li><Link to={'/tokensearch'}>{__t.interract_with_token}</Link></li>
                 <li><Link to={'/factory'}>{__t.create_token_contract}</Link></li>
+                <li><a href="https://github.com/nekonium/Token-Factory" target="_blank">GitHub</a></li>
                 {uport_deactivate}
                 <li><p className="navbar-text" style={{color: 'red'}}>{this.props.offline_msg}</p></li>
               </ul>
