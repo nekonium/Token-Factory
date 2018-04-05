@@ -1,6 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
+import LocalizedStrings from 'react-localization';
 
+
+let __t = new LocalizedStrings({
+  en:{
+    you_are_offline:"You are currently OFFLINE. ",
+    in_order_to:"In order to use the Token Factory for Nekonium, you need to:",
+    footer_text:"Issue & Interact with Standard Token Contracts on Nekonium."
+  },
+  ja: {
+    you_are_offline:"Nekoniumネットワークはオフラインです。",
+    in_order_to:"Nekonium Token Factoryには拡張機能が必要です:",
+    footer_text:"Nekonium上のERC20トークンコントラクトの作成と操作ができます。"
+  }
+ });
+console.log(__t.getInterfaceLanguage() );
+ 
 /*
 Home/front page.
 Warns if offline and recommends to install Metamask to use it.
@@ -21,13 +37,9 @@ var FrontPage = React.createClass({
     location.reload(); //refresh
   },
   render: function() {
-    /*
-    <h3 style={{textAlign: "center"}}>OR</h3>
-    <button style={{textAlign: "center"}} className="btn btn-default center-block" onClick={this.activateUPort}>Activate uPort</button></p>
-    */
     if(window.offline) {
-      var offline_msg = <p style={{textAlign: "center"}}>You are currently OFFLINE. <br /><br />
-      In order to use the Token Factory for Nekonium, you need to: <br />
+      var offline_msg = <p style={{textAlign: "center"}}>{__t.you_are_offline}<br /><br />
+      {__t.in_order_to}<br />
     <a style={{textAlign: "center"}} href="https://github.com/nekonium/NukoMask"><img width="200px" className="logo img-responsive center-block" src="./images/NukoMask.png"></img></a>
     </p>
 
@@ -38,7 +50,7 @@ var FrontPage = React.createClass({
         <img width="200px" className="logo img-responsive center-block" src="./images/icon.png"></img>
         <br />
         <p style={{textAlign: "center"}}>
-        Issue & Interact with Standard Token Contracts on Nekonium. <br />
+        {__t.footer_text}<br />
       <br />
         {offline_msg} <br />
         <br />
@@ -46,6 +58,7 @@ var FrontPage = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = FrontPage;
