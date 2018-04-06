@@ -64,9 +64,34 @@ var TxForm = React.createClass({
     for(var i = 0; i < this.props.inputs.length; i+=1) {
       args.push(this.refs[this.props.inputs[i].ref].state.val);
     }
+    //入力値のチェック
+    function check(type,v){
+      var patt={
+        "initialAmount":  "^[1-9][0-9]{0,31}$",
+        "tokenName":      "^.{1,48}$",
+        "decimalUnits":   "^([0-9]|[1-2][0-9]|3[0-6])$",
+        "tokenSymbol":    "^[^\\s]{1,10}$",
+      }[type];
+
+      if(!patt){
+        throw new Error("Invalid Type");
+      }
+      var re = new RegExp(patt);
+      if(!re.test(v)){
+        throw new Error("Invalid Value:"+type+" Must be \\"+patt+"\\");
+      }
+    }
+    try{
+      check("initialAmount",args[0]);
+      check("tokenName",args[1]);
+      check("decimalUnits",args[2]);
+      check("tokenSymbol",args[3]);
+    }catch(e){
+      alert(e.message);
+      return;
+    }
     console.log("Input values:"+args[0]+" "+args[1]+" "+args[2]+" "+args[3]);
 
-    
     //if in creation page
     if(typeof this.props.web3_token == 'undefined') {
       //token creation execution
@@ -77,19 +102,22 @@ var TxForm = React.createClass({
 
       web3.eth.getAccounts(function(err, accounts){
         console.log("Number of account:"+accounts.length);
+        //アカウントの接続チェック
         if(accounts.length==0){
           alert("Account not exist.");
           return;
         }
-
         var addr = accounts[0];
+
+        
+
         //TODO: change gas price to be dynamic. Included quicker into a block.
         //args[0] = uint256 _initialAmount,
         //args[1] = string _tokenName,
         //args[2] = uint8 _decimalUnits,
         //args[3] = string _tokenSymbol
         //var creation_data = ST.new.getData(args[0], args[1], args[2], args[3], {from: addr, data: "0x" + HumanStandardToken.prototype.binary, gasPrice: 50000000000, gas: 3100000});
-        var data=ST.new(args[0], args[1], args[2], args[3], {from: addr, data: HumanStandardToken.bytecode, gasPrice: 40000000000, gas: 2500000}, function(err, result) {
+        var data=ST.new(args[0], args[1], args[2], args[3], {from: addr, data: HumanStandardToken.bytecode, gasPrice: 100000000000, gas: 1500000}, function(err, result) {
           //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
           if(err) {
             console.log(err);
