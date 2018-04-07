@@ -45,7 +45,7 @@ var FrontPage = React.createClass({
     if(window.offline) {
       var offline_msg = <p style={{textAlign: "center"}}>{__t.you_are_offline}<br /><br />
       {__t.in_order_to}<br />
-    <a style={{textAlign: "center"}} href="https://github.com/nekonium/NukoMask"><img width="200px" className="logo img-responsive center-block" src="./images/NukoMask.png"></img></a>
+    <a style={{textAlign: "center"}} href="https://chrome.google.com/webstore/detail/nukomask/glchbnjfkbkdhhaclogbdbkkkoahcnmf"><img width="200px" className="logo img-responsive center-block" src="./images/NukoMask.png"></img></a>
     </p>
 
     }
