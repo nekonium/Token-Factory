@@ -8,14 +8,22 @@ window.offline = true; //default is there is no web3 available.
 window.ls = localStorage; //for debugging
 
 //TODO: add in flag to ALSO attach to a local node, besides through metamask.
-//Nukomaskの下にあるweb3を探す
+//nekonium,またはnukomaskの下にあるweb3を探す
+var nuko_web3=undefined;
+if(typeof nekonium !== 'undefined'){
+  console.log("connect to nekonium.web3");
+  nuko_web3=nekonium;
+}else if(typeof nukomask !=='undefined'){
+  console.log("connect to nukomask.web3");
+  nuko_web3=nukomask;
+}
 
-if (typeof nukomask !== 'undefined' && typeof nukomask.web3 !== 'undefined') {
+if (typeof nuko_web3 !== 'undefined' && typeof nuko_web3.web3 !== 'undefined') {
   // Use the Mist/wallet provider as it is available
   console.log("provider is available");
-  exported_web3 = new Web3(nukomask.web3.currentProvider);
+  exported_web3 = new Web3(nuko_web3.web3.currentProvider);
   window.offline = false; //there is a web3 available.
-  localStorage["provider"] = "nukomask";
+  localStorage["provider"] = "nekonium_web3";
 
 } else {
   //If not available, check if the user has set to use uPort (localstorage).
