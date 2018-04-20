@@ -1,8 +1,8 @@
 {
   "name": "token-factory",
   "namespace": "consensys",
-  "version": "0.1.4",
-  "description": "Token Factory",
+  "version": "0.1.5",
+  "description": "Token Factory for Nekonium",
   "dependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
@@ -53,9 +53,9 @@
   "author": "consensys.net",
   "authors": [
     {
-      "name": "Simon de la Rouviere",
-      "email": "simon@delarouviere.com",
-      "url": "https://github.com/simondlr"
+      "name": "Nekonium project",
+      "email": "nekoniumdev@gmail.com",
+      "url": "https://github.com/nekonium"
     }
   ]
 }

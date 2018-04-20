@@ -11,7 +11,7 @@ let __t = new LocalizedStrings({
     button_processing:"Creating Token",
     pf_1:"totaly supply: eg. 10",
     pf_2:"name: eg Simon Bucks",
-    pf_3:"decimal places: eg 4",
+    pf_3:"decimal places: eg 0",
     pf_4:"symbol: eg SBX"
   },
   ja: {
@@ -21,7 +21,7 @@ let __t = new LocalizedStrings({
     button_processing:"トークンをデプロイ中...",
     pf_1:"発行数量: 例 10",
     pf_2:"トークン名: 例 NEKONIUM",
-    pf_3:"小数点桁数: 例 4",
+    pf_3:"小数点位置: 例 0 (発行数量1000,位置2の場合、総発行数は10.00になります)",
     pf_4:"シンボル: NUKO"
   }
  });
